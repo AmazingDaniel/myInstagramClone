@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Post from './Post';
+import { db } from './firebase'
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      username: "guest1", 
-      caption: "Hi Im New", 
-      imageUrl: "https://scx2.b-cdn.net/gfx/news/hires/2016/howcuttingdo.jpg"
-    },
-    {
-      username: "guest2", 
-      caption: "Hi Im Second", 
-      imageUrl: "https://media4.s-nbcnews.com/i/newscms/2019_05/1405957/elizabeth-heiskell-french-onion-sliders-main-190130_1960f6384ba7d2b7e12c5032c3e68ebe.jpg"
-    },
-    {
-      username: "guest3", 
-      caption: "3rd Times a Charm", 
-      imageUrl: "https://blogs.biomedcentral.com/on-medicine/wp-content/uploads/sites/6/2019/09/iStock-1131794876.t5d482e40.m800.xtDADj9SvTVFjzuNeGuNUUGY4tm5d6UGU5tkKM0s3iPk-620x342.jpg"
-    }
-  ]);
+  const [posts, setPosts] = useState([]);
     
+// useEffect Runs a piece of code base on a specific condition
+
+useEffect(() => {
+  // this where the code runs
+  db.collection('posts').onSnapshot(snapshot => {
+    // everytime a new post is added, this code fires...
+    setPosts(snapshot.docs.map(doc => ({
+      id: doc.id, 
+      post: doc.data()
+    })));
+  })
+}, []);
 
 
   return (
@@ -36,8 +33,8 @@ function App() {
       <h1>Programming Instagram-Clone</h1>
 
       {
-        posts.map(post => (
-          <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl}  />
+        posts.map(({id, post}) => (
+          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl}  />
         ))
       }
 
