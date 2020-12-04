@@ -17,8 +17,9 @@ function App() {
       
 
       <Post />
-      {/* Posts */}
-      {/* Posts */}
+      <Post />
+      <Post />
+      
     </div>
   );
 }
