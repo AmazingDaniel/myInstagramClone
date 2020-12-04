@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Post from './Post'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <h1>Programming Instagram-Clone</h1>
       
 
+      <Post />
       {/* Posts */}
       {/* Posts */}
     </div>
