@@ -4,7 +4,6 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      
       <div className="appHeader">
         <img
           className="appHeaderImage"
@@ -14,7 +13,7 @@ function App() {
       </div>
       
       <h1>Programming Instagram-Clone</h1>
-
+      
 
       {/* Posts */}
       {/* Posts */}
