@@ -75,7 +75,7 @@ function Post({ postId, user, username, caption, imageUrl }) {
                         onClick={postComment}
                     >
                         Post
-                </button>
+                    </button>
                 </form>
             )}
         </div>
