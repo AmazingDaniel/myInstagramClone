@@ -82,7 +82,7 @@ function App() {
       })
       .catch((error) => alert(error.message))
 
-      setOpen(false);
+    setOpen(false);
   }
 
   const signIn = (event) => {
@@ -92,18 +92,11 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error.message))
 
-      setOpenSignIn(false);
+    setOpenSignIn(false);
   }
 
   return (
     <div className="App">
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry Login to Upload</h3>
-      )}
-      
-
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -176,15 +169,16 @@ function App() {
           src="https://play-lh.googleusercontent.com/9ASiwrVdio0I2i2Sd1UzRczyL81piJoKfKKBoC8PUm2q6565NMQwUJCuNGwH-enhm00"
           alt=""
         />
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+            <div className="appLoginContainer">
+              <Button onClick={() => setOpenSignIn(true)}>Sign-In</Button>
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            </div>
+          )}
       </div>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-          <div className="appLoginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign-In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          </div>
-        )}
+
 
 
 
@@ -196,6 +190,12 @@ function App() {
           <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
         ))
       }
+
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+          <h3>Sorry Login to Upload</h3>
+        )}
 
     </div>
   );
