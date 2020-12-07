@@ -45,16 +45,6 @@ function App() {
         // user has logged in...
         console.log(authUser);
         setUser(authUser)
-
-        if (authUser.displayName) {
-          //dont update username
-        } else {
-          //if we just created someone..
-          return authUser.updateProfile({
-            displayName: username,
-          });
-        }
-
       } else {
         // user has logged out...
         setUser(null);
@@ -83,6 +73,11 @@ function App() {
 
     auth
       .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username
+        })
+      })
       .catch((error) => alert(error.message))
   }
 
@@ -131,8 +126,12 @@ function App() {
           alt=""
         />
       </div>
-
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      {user ? (
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ) : (
+        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      )}
+      
 
       <h1>Programming Instagram-Clone</h1>
 
