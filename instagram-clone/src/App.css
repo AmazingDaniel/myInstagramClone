@@ -3,7 +3,7 @@
 }
 
 .App {
-  background-color: white;
+  background-color: #fafafa;
 }
 
 .appPostsRight {
@@ -13,7 +13,8 @@
 .appHeader {
   position: sticky;
   top: 0;
-  background-color: #fafafa;
+  z-index: 1;
+  background-color: white;
   padding: 20px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
